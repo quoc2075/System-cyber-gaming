@@ -1,0 +1,49 @@
+﻿@model List<QuanLyQuanNet.Models.MayTinh>
+@{
+    ViewBag.Title = "Danh sách máy";
+}
+<div style="min-height: 100vh; background-color: #ffe6f0; padding-top: 50px; padding-bottom: 50px;">
+    <div class="container mt-5">
+        <div class="card shadow p-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h2 class="text-primary">🖥️ Danh sách máy</h2>
+                <a href="@Url.Action("Them")" class="btn btn-success">+ Thêm máy mới</a>
+            </div>
+
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Mã</th>
+                        <th>Tên máy</th>
+                        <th>Trạng thái</th>
+                        <th>Đơn giá (VNĐ/giờ)</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.MaMay</td>
+                            <td>@item.TenMay</td>
+                            <td>
+                                <span class="badge @(item.TrangThai.ToLower() == "rảnh" ? "bg-success" : "bg-danger")">
+                                    @item.TrangThai
+                                </span>
+                            </td>
+                            <td>@item.DonGia.ToString("N0")</td>
+                            <td>
+                                <a href="@Url.Action("Sua", new { id = item.MaMay })" class="btn btn-sm btn-primary">✏️ Sửa</a>
+                                <a href="@Url.Action("Xoa", new { id = item.MaMay })" class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Xóa máy này?')"> Xóa</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="text-center mt-4">
+                <a href="@Url.Action("Index", "Admin")" class="btn btn-secondary">⬅️ Quay lại trang admin</a>
+            </div>
+        </div>
+    </div>

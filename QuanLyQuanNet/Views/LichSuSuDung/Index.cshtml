@@ -1,0 +1,69 @@
+﻿@model List<QuanLyQuanNet.Models.LichSuSuDung>
+@{
+    ViewBag.Title = "Lịch sử sử dụng máy";
+}
+
+<div style="min-height: 100vh; background-color: #ffe6f0; padding-top: 50px; padding-bottom: 50px;">
+    <div class="container mt-5">
+        <div class="card shadow p-4">
+            <h2 class="text-center text-primary mb-4">🕒 Lịch sử sử dụng máy</h2>
+
+            @if (Model == null || !Model.Any())
+            {
+                <div class="alert alert-info text-center">Bạn chưa có lịch sử sử dụng máy nào.</div>
+            }
+            else
+            {
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên máy</th>
+                            <th>Thời gian bắt đầu</th>
+                            <th>Thời gian kết thúc</th>
+                            <th>Số tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int stt = 1;
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@stt</td>
+                                    <td>@item.MaMay</td>
+                                    <td>@item.ThoiGianBatDau.ToString("HH:mm dd/MM/yyyy")</td>
+                                    <td>
+                                        @if (item.ThoiGianKetThuc.HasValue)
+                                        {
+                                            @item.ThoiGianKetThuc.Value.ToString("HH:mm dd/MM/yyyy")
+                                        }
+                                        else
+                                        {
+                                            <span class="text-warning">Đang sử dụng</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.SoTien.HasValue)
+                                        {
+                                            @String.Format("{0:N0} VNĐ", item.SoTien.Value)
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Chưa tính</span>
+                                        }
+                                    </td>
+                                </tr>
+                                stt++;
+                            }
+                        }
+                    </tbody>
+                </table>
+            }
+
+            <div class="text-center mt-4">
+                <a href="@Url.Action("Index", "User")" class="btn btn-secondary">⬅ Quay lại trang chính</a>
+            </div>
+        </div>
+    </div>
+</div>

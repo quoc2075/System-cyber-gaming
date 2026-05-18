@@ -1,0 +1,34 @@
+﻿@model QuanLyQuanNet.Models.MayTinh
+@{
+    ViewBag.Title = "Sửa máy";
+}
+<div style="min-height: 100vh; background-color: #ffe6f0; padding-top: 50px; padding-bottom: 50px;">
+    <div class="container mt-5">
+        <div class="card shadow p-4">
+            <h2 class="text-primary mb-4">✏️ Sửa thông tin máy</h2>
+
+            @using (Html.BeginForm())
+            {
+                @Html.HiddenFor(m => m.MaMay)
+
+                <div class="mb-3">
+                    <label class="form-label">Tên máy</label>
+                    @Html.TextBoxFor(m => m.TenMay, new { @class = "form-control" })
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Trạng thái</label>
+                    @Html.DropDownListFor(m => m.TrangThai, new SelectList(
+                        new[] { "Rảnh", "Đang sử dụng" }, Model.TrangThai), new { @class = "form-select" })
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Đơn giá (VNĐ/giờ)</label>
+                    @Html.TextBoxFor(m => m.DonGia, new { @class = "form-control", type = "number", step = "1000", min = "0" })
+                </div>
+
+                <button type="submit" class="btn btn-success"> Lưu thay đổi</button>
+                <a href="@Url.Action("Index", "May")" class="btn btn-secondary ms-2">⬅️ Quay lại</a>
+            }
+        </div>
+    </div>

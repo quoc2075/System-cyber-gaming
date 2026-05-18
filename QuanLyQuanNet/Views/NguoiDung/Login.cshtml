@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Đăng nhập";
+}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 100vh; background-color: #ffe6f0; ">
+    <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+        <div class="text-center mb-4">
+            <h2>Đăng nhập hệ thống</h2>
+            <h5 class="text-muted">QuanNet NGEM</h5>
+        </div>
+
+        <form method="post">
+            <div class="form-group mb-3">
+                <label for="soDienThoai">Số điện thoại</label>
+                <input type="text" name="soDienThoai" id="soDienThoai" class="form-control" placeholder="Nhập số điện thoại" required />
+            </div>
+            <div class="form-group mb-4">
+                <label for="matKhau">Mật khẩu</label>
+                <input type="password" name="matKhau" id="matKhau" class="form-control" placeholder="Nhập mật khẩu" required />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block w-100">Đăng nhập</button>
+        </form>
+
+        @if (ViewBag.ThongBao != null)
+        {
+            <div class="alert alert-danger text-center mt-3">
+                @ViewBag.ThongBao
+            </div>
+        }
+
+        <div class="text-center mt-3">
+            <a href="@Url.Action("DangKy", "NguoiDung")">Chưa có tài khoản? Đăng ký ngay</a>
+        </div>
+    </div>
+</div>

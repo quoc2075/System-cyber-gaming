@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Trang người dùng";
+}
+
+<div class="d-flex justify-content-center align-items-center flex-column" style="min-height: 100vh; background-color: #f8d7da;">
+    <h2 class="text-center mb-3">👤 Xin chào: @ViewBag.HoTen</h2>
+
+    <div class="text-center mb-3">
+        <p>
+            💰 Số dư tài khoản của bạn:
+            <strong class="text-success">@ViewBag.SoDu.ToString("N0") VNĐ</strong>
+        </p>
+    </div>
+
+    @if (ViewBag.ThongBao != null)
+    {
+        <div class="alert alert-warning text-center w-100" style="max-width: 600px;">
+            @ViewBag.ThongBao
+        </div>
+    }
+
+    <ul class="list-group text-center w-100 mb-4" style="max-width: 600px;">
+        <li class="list-group-item">
+            <a href="@Url.Action("Logout", "NguoiDung")" class="btn btn-danger w-100">Đăng xuất</a>
+        </li>
+    </ul>
+
+    @if (Model.Count == 0)
+    {
+        <p class="text-center text-muted">💤 Hiện tại không có máy nào hiển thị (do hết tiền hoặc không còn máy rảnh).</p>
+    }
+    else
+    {
+        <h3 class="text-center mt-4">💻 Máy đang rảnh</h3>
+
+        <div class="table-responsive w-100 mx-auto" style="max-width: 1000px;">
+            <table class="table table-bordered table-striped shadow-sm">
+                <thead class="thead-light">
+                    <tr class="text-center">
+                        <th>STT</th>
+                        <th>Tên máy</th>
+                        <th>Đơn giá</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int stt = 1;
+                        foreach (var may in Model)
+                        {
+                            <tr class="text-center">
+                                <td>@stt</td>
+                                <td>@may.TenMay</td>
+                                <td>@String.Format("{0:N0} đ", may.DonGia)</td>
+                                <td>
+                                    <a href="@Url.Action("ChonMay", "SuDungMay", new { id = may.MaMay })" class="btn btn-primary rounded-pill px-4">Sử dụng</a>
+                                </td>
+                            </tr>
+                            stt++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+    <ul class="list-group w-100 mt-4" style="max-width: 600px;">
+        <li class="list-group-item">
+            <a href="@Url.Action("Index", "LichSuSuDung")" class="btn btn-info w-100">📜 Lịch sử sử dụng</a>
+        </li>
+        <li class="list-group-item">
+            <a href="@Url.Action("Index", "NapTien")" class="btn btn-success w-100">💵 Nạp tiền</a>
+        </li>
+        <li class="list-group-item">
+            <a href="@Url.Action("KetThuc", "SuDungMay")" class="btn btn-danger w-100" onclick="return confirm('Kết thúc sử dụng máy?')">⛔ Kết thúc sử dụng máy</a>
+        </li>
+    </ul>
+
+    @if (TempData["ThongBao"] != null)
+    {
+        <div class="alert alert-success text-center mt-3 w-100" style="max-width: 600px;">
+            @TempData["ThongBao"]
+        </div>
+    }
+</div>

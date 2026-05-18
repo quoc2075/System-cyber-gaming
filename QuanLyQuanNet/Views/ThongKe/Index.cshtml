@@ -1,0 +1,62 @@
+﻿@{
+        ViewBag.Title = "Thống kê doanh thu";
+        int ngay = ViewBag.Ngay ?? DateTime.Now.Day;
+        int thang = ViewBag.Thang ?? DateTime.Now.Month;
+        int nam = ViewBag.Nam ?? DateTime.Now.Year;
+}
+<div class="d-flex justify-content-center align-items-center flex-column" style="min-height: 100vh; background-color: #ffe6f0;">
+
+    <h2 class="text-center">📊 Thống kê doanh thu </h2>
+
+    <form method="get" class="text-center">
+        <div class="form-group d-inline-block mx-2">
+            <label for="ngay">Ngày:</label>
+            <select name="ngay" id="ngay" class="form-control">
+                @for (int i = 1; i <= 31; i++)
+                {
+                    <option value="@i" @(i == ngay ? "selected" : "")>@i</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group d-inline-block mx-2">
+            <label for="thang">Tháng:</label>
+            <select name="thang" id="thang" class="form-control">
+                @for (int i = 1; i <= 12; i++)
+                {
+                    <option value="@i" @(i == thang ? "selected" : "")>Tháng @i</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group d-inline-block mx-2">
+            <label for="nam">Năm:</label>
+            <input type="number" name="nam" value="@nam" class="form-control" style="width: 100px;" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Xem thống kê</button>
+    </form>
+
+    <br />
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>Tổng tiền nạp</th>
+                <td class="text-success">@String.Format("{0:N0}", ViewBag.TongNap) VNĐ</td>
+            </tr>
+            <tr>
+                <th>Tổng tiền sử dụng máy</th>
+                <td class="text-danger">@String.Format("{0:N0}", ViewBag.TongChi) VNĐ</td>
+            </tr>
+            <tr>
+                <th>Số tiền trong hệ thống của các tài khoản của ngày</th>
+                <td class="font-weight-bold">@String.Format("{0:N0}", ViewBag.LoiNhuan) VNĐ</td>
+            </tr>
+        </table>
+    </div>
+
+    <br />
+    <div class="text-center">
+        <a href="@Url.Action("Index", "Admin")" class="btn btn-link">⬅️ Quay lại trang admin</a>
+    </div>

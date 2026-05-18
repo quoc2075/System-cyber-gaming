@@ -1,0 +1,52 @@
+﻿@model List<QuanLyQuanNet.Models.NguoiDung>
+@{
+    ViewBag.Title = "Quản lý người dùng";
+}
+<div style="min-height: 100vh; background-color: #ffe6f0; padding-top: 50px; padding-bottom: 50px;">
+    <div class="container mt-5">
+        <h2 class="text-center text-primary mb-4">👥 Quản lý người dùng</h2>
+
+        <table class="table table-bordered table-striped text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Họ tên</th>
+                    <th>SĐT</th>
+                    <th>Pass</th>
+                    <th>Vai trò</th>
+                    <th>Số dư (VNĐ)</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in Model)
+                {
+                    <tr>
+                        <td>@u.MaNguoiDung</td>
+                        <td>@u.HoTen</td>
+                        <td>@u.SoDienThoai</td>
+                        <td>@u.MatKhau</td>
+                        <td>
+                            <span class="badge @(u.VaiTro.ToLower() == "admin" ? "bg-danger" : "bg-success")">
+                                @u.VaiTro
+                            </span>
+                        </td>
+                        <td>@String.Format("{0:N0}", u.SoDu)</td>
+                        <td>
+
+
+                            <a class="btn btn-sm btn-info ms-1" href="@Url.Action("Sua", new { id = u.MaNguoiDung })">✏️ Sửa</a>
+
+                            <a class="btn btn-sm btn-danger ms-1" href="@Url.Action("Xoa", new { id = u.MaNguoiDung })" onclick="return confirm('Xóa người dùng này?')">
+                                🗑️ Xóa
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="mt-4">
+            <a href="@Url.Action("Index", "Admin")" class="btn btn-outline-secondary">⬅️ Quay lại trang admin</a>
+        </div>
+    </div>

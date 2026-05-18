@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Trang Admin";
+}
+
+<div style="min-height: 100vh; background-color: #ffe6f0; padding-top: 50px; padding-bottom: 50px;">
+    <div class="container">
+        <div class="card shadow p-4">
+            <h2 class="text-center text-primary mb-4">👑 Chào Admin: @ViewBag.HoTen</h2>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+                    <a href="@Url.Action("Index", "ThongKe")" class="btn btn-outline-info w-100 py-3">
+                        📊 Thống kê doanh thu
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="@Url.Action("Index", "AdminNguoiDung")" class="btn btn-outline-success w-100 py-3">
+                        👥 Quản lý người dùng
+                    </a>
+                </div>
+                <div class="col">
+                    <a href="@Url.Action("Index", "May")" class="btn btn-outline-primary w-100 py-3">
+                        🖥️ Quản lý máy
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="@Url.Action("Logout", "NguoiDung")" class="btn btn-danger">Đăng xuất</a>
+            </div>
+        </div>
+    </div>
+</div>

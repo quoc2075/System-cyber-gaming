@@ -1,0 +1,23 @@
+﻿@model QuanLyQuanNet.Models.MayTinh
+@{
+    ViewBag.Title = "Thêm máy";
+}
+<div style="min-height: 100vh; background-color: #ffe6f0; padding-top: 50px; padding-bottom: 50px;">
+    <h2 class="text-center">Thêm máy mới</h2>
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <label for="TenMay">Tên máy</label>
+            @Html.TextBoxFor(m => m.TenMay, new { @class = "form-control", placeholder = "Nhập tên máy" })
+        </div>
+
+        <div class="form-group">
+            <label for="DonGia">Đơn giá (VNĐ/giờ)</label>
+            @Html.TextBoxFor(m => m.DonGia, new { @class = "form-control", placeholder = "Nhập đơn giá" })
+        </div>
+
+        <div class="form-group text-center">
+            <input type="submit" value="Thêm máy" class="btn btn-primary" />
+        </div>
+    }
